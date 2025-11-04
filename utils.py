@@ -92,7 +92,7 @@ def config_logging(comment=None):
         handlers=[logging.FileHandler(log_fname), logging.StreamHandler()]
     )
 
-def prepare_dataloaders(imgpath_dic, data_name, root_dir="../data/images/", data_dir="/paper_dataset/", batch_size=16, img_size=224, use_mean_img=True, neg_samples=True, num_workers=0, collate_fn=collate_fn):
+def prepare_dataloaders(imgpath_dic, data_name, data_dir="/paper_dataset/", batch_size=16, img_size=224, use_mean_img=True, neg_samples=True, num_workers=0, collate_fn=collate_fn):
     transform = torchvision.transforms.Compose(
         [
             torchvision.transforms.Resize((img_size, img_size)),
@@ -106,7 +106,6 @@ def prepare_dataloaders(imgpath_dic, data_name, root_dir="../data/images/", data
         imgpath_dic,
         word_dic=data_dic['wd'],
         attr_dic=data_dic['ad'],
-        root_dir=root_dir,
         data_dir=data_dir,
         transform=transform,
         use_mean_img=use_mean_img,
@@ -119,7 +118,6 @@ def prepare_dataloaders(imgpath_dic, data_name, root_dir="../data/images/", data
         imgpath_dic,
         word_dic=data_dic['wd'],
         attr_dic=data_dic['ad'],
-        root_dir=root_dir,
         data_dir=data_dir,
         transform=transform,
         use_mean_img=use_mean_img,
@@ -132,7 +130,6 @@ def prepare_dataloaders(imgpath_dic, data_name, root_dir="../data/images/", data
         imgpath_dic,
         word_dic=data_dic['wd'],
         attr_dic=data_dic['ad'],
-        root_dir=root_dir,
         data_dir=data_dir,
         transform=transform,
         use_mean_img=use_mean_img,
