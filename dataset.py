@@ -22,7 +22,6 @@ class CategoryDataset(Dataset):
     each suit has at least 3 items, the missing items will use a mean image.
 
     Args:
-        root_dir: Directory stores source images
         data_file: A json file stores each outfit index and description
         data_dir: Directory stores data_file and mean_images
         transform: Operations to transform original images to fix size
@@ -33,14 +32,12 @@ class CategoryDataset(Dataset):
                  imgpath_dic,
                  word_dic,
                  attr_dic,
-                 root_dir="../data/images/",
-                 data_file='train_dict_mss.json',
+                 data_file='outfit.json',
                  data_dir="/paper_dataset/",
                  transform=None,
                  use_mean_img=True,
                  neg_samples=True,
                  ):
-        self.root_dir = root_dir
         self.data_dir = data_dir
         self.transform = transform
         self.use_mean_img = use_mean_img
@@ -49,13 +46,9 @@ class CategoryDataset(Dataset):
         self.neg_samples = neg_samples # if True, will randomly generate negative outfit samples
         self.imgpath_dic = imgpath_dic
         
-        # Style dict: 데이터에 맞게 변경
-        if 'outfit2' in data_file:
-            with open('/paper_dataset/style_dict2.pkl', 'rb') as f:
-                self.style_dict = pickle.load(f)
-        else: 
-            with open('/paper_dataset/style_dict.pkl', 'rb') as f:
-                self.style_dict = pickle.load(f)
+        with open('/paper_dataset/style_dict.pkl', 'rb') as f:
+            self.style_dict = pickle.load(f)
+
                 
         self.vocabulary, self.word_to_idx = [], {}
         self.word_to_idx['UNK'] = len(self.vocabulary)
